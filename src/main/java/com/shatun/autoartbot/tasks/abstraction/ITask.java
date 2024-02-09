@@ -1,4 +1,4 @@
-package com.shatun.autoartbot.tasks.interaces;
+package com.shatun.autoartbot.tasks.abstraction;
 
 public interface ITask {
     void handleTick();

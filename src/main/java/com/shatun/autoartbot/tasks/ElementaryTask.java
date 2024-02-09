@@ -1,16 +1,35 @@
 package com.shatun.autoartbot.tasks;
 
-import com.shatun.autoartbot.tasks.interaces.ITask;
-
-public abstract class ElementaryTask implements ITask {
+public abstract class ElementaryTask extends Task {
     protected boolean finished = false;
-    protected TickTimer timer;
+
+    public ElementaryTask(int repeatCount) {
+        super(repeatCount);
+    }
+
     @Override
-    public boolean isFinished(){
+    public void OnFinish() {
+        super.OnFinish();
+    }
+
+    @Override
+    public void handleTick() {
+        super.handleTick();
+    }
+
+    @Override
+    public void OnStart() {
+        super.OnStart();
+    }
+
+    @Override
+    public boolean isFinished() {
         return finished;
     }
+
     @Override
-    public void OnStart(){
-        timer = new TickTimer();
+    public void refresh() {
+        finished = false;
     }
+
 }

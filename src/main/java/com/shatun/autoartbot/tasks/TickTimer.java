@@ -1,6 +1,6 @@
 package com.shatun.autoartbot.tasks;
 
-import com.shatun.autoartbot.tasks.interaces.ITimer;
+import com.shatun.autoartbot.tasks.abstraction.ITimer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +15,9 @@ public class TickTimer implements ITimer {
                 timer.active = false;
             }
         }
+    }
+    public static void clear(){
+        timers = new ArrayList<>();
     }
     private int waitTime;
     private int currentTime;
