@@ -32,4 +32,8 @@ public abstract class ElementaryTask extends Task {
         finished = false;
     }
 
+    @Override
+    public void OnRestart() {
+
+    }
 }

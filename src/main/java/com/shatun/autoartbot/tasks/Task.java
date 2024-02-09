@@ -39,4 +39,5 @@ public abstract class Task implements ITask {
         return isFinished() && (repeatCount == -1 || repeatCount > 0);
     }
     public abstract void refresh();
+    public abstract void OnRestart();
 }

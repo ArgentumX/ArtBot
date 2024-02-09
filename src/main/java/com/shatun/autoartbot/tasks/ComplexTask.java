@@ -39,6 +39,11 @@ public class ComplexTask extends Task {
     }
 
     @Override
+    public void OnRestart() {
+
+    }
+
+    @Override
     public boolean isFinished() {
         return taskList.size() == currentTaskId;
     }

@@ -1,13 +1,12 @@
 package com.shatun.autoartbot.art;
 
-import java.text.DecimalFormat;
 import java.util.*;
 
-public class Art {
+public class MapArt {
     private final List<String> resources = new ArrayList<>();
-    public Art(Map<CarpetType, Integer> rawResources){
+    public MapArt(Map<CarpetType, Integer> rawResources){
         if (rawResources.size() != 16){
-            throw new IllegalArgumentException("Wrong size of art resources amount map");
+            throw new IllegalArgumentException("Wrong size of map-art resources map");
         }
 
         for (CarpetType carpetType : rawResources.keySet()){
