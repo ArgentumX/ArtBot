@@ -1,11 +1,11 @@
-package com.shatun.autoartbot.tasks.elementary_task;
+package com.shatun.autoartbot.tasks.elementary_task.building_art;
 
 import com.shatun.autoartbot.tasks.ElementaryTask;
-import com.shatun.autoartbot.tasks.Task;
 
-public class ClearingAreaTask extends ElementaryTask {
-
-    public ClearingAreaTask(int repeatCount) {
+public class BuildingArtTask extends ElementaryTask {
+    enum BuildingArtState {
+    }
+    public BuildingArtTask(int repeatCount) {
         super(repeatCount);
     }
 

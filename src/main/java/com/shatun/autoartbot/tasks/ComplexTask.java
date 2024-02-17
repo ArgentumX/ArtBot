@@ -40,7 +40,6 @@ public class ComplexTask extends Task {
 
     @Override
     public void OnRestart() {
-
     }
 
     @Override
@@ -58,5 +57,10 @@ public class ComplexTask extends Task {
             task.refresh();
         }
         currentTaskId = 0;
+    }
+
+    @Override
+    public void Finish() {
+
     }
 }

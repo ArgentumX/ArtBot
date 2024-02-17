@@ -15,6 +15,9 @@ public abstract class ElementaryTask extends Task {
     @Override
     public void handleTick() {
         super.handleTick();
+        if (!finished){
+            throw new IllegalCallerException("Cant handle tick after finish process");
+        }
     }
 
     @Override
@@ -33,7 +36,10 @@ public abstract class ElementaryTask extends Task {
     }
 
     @Override
-    public void OnRestart() {
+    public void OnRestart() {}
 
+    @Override
+    public void Finish() {
+        finished = true;
     }
 }

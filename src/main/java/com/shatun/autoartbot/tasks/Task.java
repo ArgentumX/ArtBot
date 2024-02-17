@@ -5,12 +5,10 @@ import com.shatun.autoartbot.tasks.abstraction.ITask;
 import com.shatun.autoartbot.tasks.abstraction.ITimer;
 
 public abstract class Task implements ITask {
-    protected ITimer timer;
     protected int repeatCount;
 
     public Task(int repeatCount) {
         this.repeatCount = repeatCount;
-        timer = new TickTimer();
     }
     @Override
     public void OnFinish() {
@@ -27,14 +25,13 @@ public abstract class Task implements ITask {
             OnStart();
     }
     @Override
-    public void handleTick() {}
+    public void handleTick() {
+
+    }
 
     @Override
     public void OnStart() {}
 
-    public ITimer getTimer(){
-        return timer;
-    }
     public boolean needsStartAgain(){
         return isFinished() && (repeatCount == -1 || repeatCount > 0);
     }

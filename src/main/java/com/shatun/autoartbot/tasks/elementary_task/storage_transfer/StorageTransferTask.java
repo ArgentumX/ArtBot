@@ -1,9 +1,12 @@
-package com.shatun.autoartbot.tasks.elementary_task;
+package com.shatun.autoartbot.tasks.elementary_task.storage_transfer;
 
 import com.shatun.autoartbot.tasks.ElementaryTask;
+import com.shatun.autoartbot.tasks.Task;
 
-public class BuildingArtArea extends ElementaryTask {
-    public BuildingArtArea(int repeatCount) {
+public class StorageTransferTask extends ElementaryTask {
+    enum StorageTransferState {
+    }
+    public StorageTransferTask(int repeatCount) {
         super(repeatCount);
     }
 
