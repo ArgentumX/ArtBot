@@ -45,6 +45,7 @@ public class ClearingAreaTask extends ElementaryTask {
                         Finish();
                     }
                     else {
+                        Bot.getInstance().processController.allowBreak(true);
                         Bot.getInstance().processController.clearArtSegment(Bot.getInstance().getMemory().getPaintTopLeftCorner(), xBreakingStage, zBreakingStage);
                         state = ClearingAreaState.BREAKING;
                     }
@@ -52,6 +53,7 @@ public class ClearingAreaTask extends ElementaryTask {
                 break;
             case BREAKING:
                 if (!Bot.getInstance().processController.isClearingArtArea()) {
+                    Bot.getInstance().processController.allowBreak(false);
                     xBreakingStage++;
                     if (xBreakingStage > 7) {
                         xBreakingStage = 0;

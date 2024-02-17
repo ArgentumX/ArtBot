@@ -7,6 +7,9 @@ import com.shatun.autoartbot.controllers.interfaces.IComplexProcessController;
 import com.shatun.autoartbot.controllers.interfaces.IInteractionController;
 import com.shatun.autoartbot.controllers.interfaces.IInventoryController;
 import com.shatun.autoartbot.memory.Memory;
+import com.shatun.autoartbot.tasks.ComplexTask;
+import com.shatun.autoartbot.tasks.Task;
+import com.shatun.autoartbot.tasks.TaskConstructor;
 import com.shatun.autoartbot.tasks.TickTimer;
 import com.shatun.autoartbot.tasks.abstraction.ITimer;
 
@@ -17,6 +20,7 @@ public class Bot {
     public IComplexProcessController processController;
     private Memory memory;
     private ITimer timer;
+    private ComplexTask task;
     private static Bot instance;
     public Bot(){
         interactionController = new InteractionController();
@@ -24,6 +28,7 @@ public class Bot {
         processController = new ComplexProcessController();
         timer = new TickTimer();
         memory = new Memory();
+        task = TaskConstructor.getClearingArtAreaTask();
     }
     public static Bot getInstance(){
         if (instance == null){
@@ -38,5 +43,8 @@ public class Bot {
 
     public ITimer getTimer() {
         return timer;
+    }
+    public ComplexTask getTask() {
+        return task;
     }
 }

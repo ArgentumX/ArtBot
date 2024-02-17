@@ -10,5 +10,6 @@ public interface IComplexProcessController {
     void goTo(Vec3 position);
     void clearArtSegment(Vec3 artTopLeftCorner, int xBreakingStage, int zBreakingStage);
     void collectItems(boolean enable);
+    void allowBreak(boolean enable);
     void stop();
 }

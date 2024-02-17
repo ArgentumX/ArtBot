@@ -20,11 +20,13 @@ public class AutoArtBot
 {
     public static final String MODID = "autoartbot";
     private static final Logger LOGGER = LogUtils.getLogger();
+    private Bot bot;
 
     public AutoArtBot()
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
         MinecraftForge.EVENT_BUS.register(new Listener());
+        bot = Bot.getInstance();
     }
 }

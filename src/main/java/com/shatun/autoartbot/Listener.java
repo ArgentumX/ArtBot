@@ -15,6 +15,7 @@ public class Listener {
     @SubscribeEvent
     public static void OnTick(TickEvent.ClientTickEvent event){
         Bot.getInstance().getTimer().handleTimeStep();
+        Bot.getInstance().getTask().handleTick();
     }
 
     @SubscribeEvent
