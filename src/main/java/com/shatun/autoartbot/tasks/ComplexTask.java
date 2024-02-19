@@ -1,6 +1,7 @@
 package com.shatun.autoartbot.tasks;
 
 import com.shatun.autoartbot.tasks.abstraction.ITask;
+import com.shatun.autoartbot.utils.PlayerUtils;
 
 import java.util.List;
 

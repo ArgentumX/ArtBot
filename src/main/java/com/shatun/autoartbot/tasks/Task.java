@@ -20,9 +20,10 @@ public abstract class Task implements ITask {
                 repeatCount -= 1;
             }
         }
-        refresh();
-        if (needsStartAgain())
+        if (needsStartAgain()) {
+            refresh();
             OnStart();
+        }
     }
     @Override
     public void handleTick() {

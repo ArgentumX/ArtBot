@@ -1,6 +1,9 @@
 package com.shatun.autoartbot;
 
 import com.mojang.logging.LogUtils;
+import com.shatun.autoartbot.utils.PlayerUtils;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.client.event.ClientChatEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
@@ -26,7 +29,46 @@ public class AutoArtBot
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
-        MinecraftForge.EVENT_BUS.register(new Listener());
+        MinecraftForge.EVENT_BUS.register(ClientListener.class);
         bot = Bot.getInstance();
+    }
+    public static class ClientListener {
+        @SubscribeEvent(priority = EventPriority.LOWEST)
+        public static void OnClientSendMessage(ClientChatEvent event) {
+            if (event.getMessage().startsWith("*")){
+                String[] args = event.getMessage().replace("*", "").split(" ");
+                switch (args[0]) {
+                    case "pos":
+                        Player p = Minecraft.getInstance().player;
+                        assert p != null;
+                        PlayerUtils.send(p.position().toString());
+                        break;
+                    case "clear":
+                        Bot.getInstance().clearArtArea();
+                        break;
+                    case "transfer":
+                        Bot.getInstance().transferItems();
+                        break;
+                    default:
+                        PlayerUtils.send("Ты конченый? Введи нормально блять");
+                        break;
+                }
+            }
+        }
+        @SubscribeEvent
+        public static void OnTick(TickEvent.ClientTickEvent event){
+            if (Minecraft.getInstance().player == null){
+                return;
+            }
+            if (!Bot.getInstance().isActive()){
+                return;
+            }
+            Bot.getInstance().handleTick();
+        }
+
+        @SubscribeEvent
+        public static void OnDisconnect(PlayerEvent.PlayerLoggedOutEvent event){
+
+        }
     }
 }

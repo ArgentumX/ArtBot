@@ -12,6 +12,7 @@ import com.shatun.autoartbot.tasks.Task;
 import com.shatun.autoartbot.tasks.TaskConstructor;
 import com.shatun.autoartbot.tasks.TickTimer;
 import com.shatun.autoartbot.tasks.abstraction.ITimer;
+import com.shatun.autoartbot.utils.PlayerUtils;
 
 public class Bot {
 
@@ -28,7 +29,6 @@ public class Bot {
         processController = new ComplexProcessController();
         timer = new TickTimer();
         memory = new Memory();
-        task = TaskConstructor.getClearingArtAreaTask();
     }
     public static Bot getInstance(){
         if (instance == null){
@@ -46,5 +46,22 @@ public class Bot {
     }
     public ComplexTask getTask() {
         return task;
+    }
+    public void clearArtArea(){
+        PlayerUtils.send("Start clearing area task");
+        task = TaskConstructor.getClearingArtAreaTask();
+    }
+    public void transferItems(){
+        PlayerUtils.send("Start transfer items task");
+        task = TaskConstructor.getStorageTransferTask();
+    }
+    public boolean isActive(){
+        return task != null && !task.isFinished();
+    }
+    public void handleTick(){
+        timer.handleTimeStep();
+        if (!timer.isActive()){
+            task.handleTick();
+        }
     }
 }

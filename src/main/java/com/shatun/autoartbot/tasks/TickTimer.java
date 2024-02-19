@@ -11,7 +11,7 @@ public class TickTimer implements ITimer {
     private boolean active = false;
     private boolean waitTimePassed = false;
     private boolean resetOnFinish = false;
-    public TickTimer() {
+    public TickTimer(){
         reset();
     }
     @Override
@@ -46,9 +46,9 @@ public class TickTimer implements ITimer {
         resetOnFinish = false;
     }
     public void handleTimeStep(){
-        if (this.active) {
-            this.currentTime++;
-            if (this.currentTime == this.waitTime) {
+        if (active) {
+            currentTime++;
+            if (currentTime >= waitTime) {
                 if (resetOnFinish){
                     reset();
                 }

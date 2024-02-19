@@ -1,7 +1,10 @@
 package com.shatun.autoartbot.tasks.elementary_task.clearing_area;
 
 import com.shatun.autoartbot.Bot;
+import com.shatun.autoartbot.memory.Memory;
+import com.shatun.autoartbot.settings.BotSettings;
 import com.shatun.autoartbot.tasks.ElementaryTask;
+import com.shatun.autoartbot.utils.PlayerUtils;
 
 public class ClearingAreaTask extends ElementaryTask {
     enum ClearingAreaState {
@@ -9,7 +12,8 @@ public class ClearingAreaTask extends ElementaryTask {
         BREAKING,
         COLLECTING,
         DELIVERING,
-        OPENED_CONTAINER
+        OPENED_CONTAINER,
+        TRYING_SLEEP
     }
     private int xBreakingStage;
     private int zBreakingStage;
@@ -18,7 +22,7 @@ public class ClearingAreaTask extends ElementaryTask {
         super(repeatCount);
         xBreakingStage = 0;
         zBreakingStage = 0;
-        state = ClearingAreaState.DELIVERING;
+        state = ClearingAreaState.START;
     }
 
     @Override
@@ -30,7 +34,11 @@ public class ClearingAreaTask extends ElementaryTask {
                 state = ClearingAreaState.DELIVERING;
                 break;
             case DELIVERING:
+                if (!Bot.getInstance().processController.isEating()){
+                    Bot.getInstance().processController.eat(true);
+                }
                 if (!Bot.getInstance().processController.isGoing()){
+                    Bot.getInstance().processController.eat(false);
                     Bot.getInstance().inventoryController.openChest(Bot.getInstance().getMemory().getDropChest());
                     state = ClearingAreaState.OPENED_CONTAINER;
                 }
@@ -38,13 +46,21 @@ public class ClearingAreaTask extends ElementaryTask {
             case OPENED_CONTAINER:
                 if (!Bot.getInstance().inventoryController.isInventoryEmpty()){
                     Bot.getInstance().inventoryController.putOneStackInOpenedChest();
-                    Bot.getInstance().getTimer().wait(5, true);
+                    Bot.getInstance().getTimer().wait(BotSettings.putInventoryItemTimeout, true);
                 }
                 else {
-                    if (zBreakingStage > 7){
+                    Bot.getInstance().inventoryController.closeChest();
+                    state = ClearingAreaState.TRYING_SLEEP;
+                }
+                break;
+            case TRYING_SLEEP:
+                if (!Bot.getInstance().getTimer().isTimePassed(true)){
+                    Bot.getInstance().getTimer().wait(BotSettings.sleepTime, false);
+                    Bot.getInstance().interactionController.click(Bot.getInstance().getMemory().getDropChest().add(-1.5, 0, 0));
+                } else {
+                    if (zBreakingStage > 7) {
                         Finish();
-                    }
-                    else {
+                    } else {
                         Bot.getInstance().processController.allowBreak(true);
                         Bot.getInstance().processController.clearArtSegment(Bot.getInstance().getMemory().getPaintTopLeftCorner(), xBreakingStage, zBreakingStage);
                         state = ClearingAreaState.BREAKING;
@@ -64,7 +80,7 @@ public class ClearingAreaTask extends ElementaryTask {
                 break;
             case COLLECTING:
                 if (!Bot.getInstance().getTimer().isTimePassed(true)) {
-                    Bot.getInstance().getTimer().wait(480, false);
+                    Bot.getInstance().getTimer().wait(BotSettings.collectItemsTime, false);
                     Bot.getInstance().processController.collectItems(true);
                 }
                 else {
@@ -74,6 +90,7 @@ public class ClearingAreaTask extends ElementaryTask {
                         state = ClearingAreaState.DELIVERING;
                     } else {
                         Bot.getInstance().processController.clearArtSegment(Bot.getInstance().getMemory().getPaintTopLeftCorner(), xBreakingStage, zBreakingStage);
+                        state = ClearingAreaState.BREAKING;
                     }
                 }
                 break;
@@ -86,6 +103,7 @@ public class ClearingAreaTask extends ElementaryTask {
     @Override
     public void OnFinish() {
         super.OnFinish();
+        PlayerUtils.send("Finished clearing area task");
     }
 
     @Override

@@ -8,22 +8,22 @@ public class Memory {
     private Vec3 paintTopLeftCorner;
     private Vec3 dropTransferPosition;
     private String[] colorsOrder = {
-            "white",
-            "light_gray",
-            "gray",
-            "black",
-            "purple",
-            "blue",
-            "cyan",
-            "light_blue",
-            "lime",
-            "green",
-            "brown",
-            "red",
-            "magenta",
-            "pink",
-            "orange",
-            "yellow"};
+            "white_carpet",
+            "light_gray_carpet",
+            "gray_carpet",
+            "black_carpet",
+            "purple_carpet",
+            "blue_carpet",
+            "cyan_carpet",
+            "light_blue_carpet",
+            "lime_carpet",
+            "green_carpet",
+            "brown_carpet",
+            "red_carpet",
+            "magenta_carpet",
+            "pink_carpet",
+            "orange_carpet",
+            "yellow_carpet"};
     public Memory(){
         dropChest = new Vec3(868, 70, -330);
         paintTopLeftCorner = new Vec3(832, 63, -320);
@@ -50,9 +50,9 @@ public class Memory {
         return colorsOrder;
     }
 
-    public Vec3 getLootChest(String carpetColor){
+    public Vec3 getLootChest(String carpetId){
         for (int i = 0; i < colorsOrder.length; i++){
-            if (colorsOrder[i].equalsIgnoreCase(carpetColor)){
+            if (colorsOrder[i].equalsIgnoreCase(carpetId)){
 
                 return carpetChest.add(i, 0, 0);
             }

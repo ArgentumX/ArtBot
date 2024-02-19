@@ -1,5 +1,7 @@
 package com.shatun.autoartbot.tasks;
 
+import com.shatun.autoartbot.utils.PlayerUtils;
+
 public abstract class ElementaryTask extends Task {
     protected boolean finished = false;
 
@@ -15,7 +17,7 @@ public abstract class ElementaryTask extends Task {
     @Override
     public void handleTick() {
         super.handleTick();
-        if (!finished){
+        if (finished){
             throw new IllegalCallerException("Cant handle tick after finish process");
         }
     }

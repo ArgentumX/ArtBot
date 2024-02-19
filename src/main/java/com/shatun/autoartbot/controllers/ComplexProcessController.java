@@ -1,11 +1,15 @@
 package com.shatun.autoartbot.controllers;
 
 import baritone.api.BaritoneAPI;
+import com.mojang.blaze3d.platform.InputConstants;
 import com.shatun.autoartbot.controllers.interfaces.IComplexProcessController;
 import com.shatun.autoartbot.utils.PlayerUtils;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.world.phys.Vec3;
 
 public class ComplexProcessController implements IComplexProcessController {
+
+    private boolean isEatButtonPressed = false;
     @Override
     public boolean isGoing() {
         return BaritoneAPI.getProvider().getPrimaryBaritone().getCustomGoalProcess().isActive();
@@ -19,6 +23,11 @@ public class ComplexProcessController implements IComplexProcessController {
     @Override
     public boolean isFollowing() {
         return BaritoneAPI.getProvider().getPrimaryBaritone().getFollowProcess().isActive();
+    }
+
+    @Override
+    public boolean isEating() {
+        return isEatButtonPressed;
     }
 
     @Override
@@ -43,7 +52,7 @@ public class ComplexProcessController implements IComplexProcessController {
             PlayerUtils.chat("#follow entity item");
         }
         else {
-            PlayerUtils.chat("#follow entity ");
+            stop();
         }
     }
 
@@ -55,5 +64,12 @@ public class ComplexProcessController implements IComplexProcessController {
     @Override
     public void allowBreak(boolean enable) {
         BaritoneAPI.getSettings().allowBreak.value = enable;
+    }
+
+    @Override
+    public void eat(boolean enable) {
+        isEatButtonPressed = enable;
+        KeyMapping.click(InputConstants.Type.KEYSYM.getOrCreate(InputConstants.KEY_9));
+        KeyMapping.set(InputConstants.Type.MOUSE.getOrCreate(1), enable);
     }
 }
