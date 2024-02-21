@@ -50,7 +50,7 @@ public class AutoArtBot
                         Bot.getInstance().transferItems();
                         break;
                     default:
-                        PlayerUtils.send("Ты конченый? Введи нормально блять");
+                        PlayerUtils.send("Unregistered command");
                         break;
                 }
             }

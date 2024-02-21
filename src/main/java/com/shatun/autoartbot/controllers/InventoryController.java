@@ -120,4 +120,16 @@ public class InventoryController implements IInventoryController {
     public boolean inventoryContains(String itemId) {
         return getItemAmount(itemId) > 0;
     }
+
+    @Override
+    public void takeOneItemStackFromContainer() {
+        Minecraft mc = Minecraft.getInstance();
+        int menu_id = mc.player.containerMenu.containerId;
+        for (int i = 0; i < 54; i++){
+            if (mc.player.containerMenu.slots.get(i).getItem().getCount() == 64){
+                Minecraft.getInstance().gameMode.handleInventoryMouseClick(menu_id, i, 0, ClickType.QUICK_MOVE, Minecraft.getInstance().player);
+                break;
+            }
+        }
+    }
 }

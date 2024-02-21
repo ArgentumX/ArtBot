@@ -1,5 +1,6 @@
 package com.shatun.autoartbot.tasks;
 
+import com.shatun.autoartbot.tasks.elementary_task.building_art.BuildingArtTask;
 import com.shatun.autoartbot.tasks.elementary_task.clearing_area.ClearingAreaTask;
 import com.shatun.autoartbot.tasks.elementary_task.storage_transfer.StorageTransferTask;
 import org.checkerframework.checker.units.qual.C;
@@ -18,4 +19,5 @@ public class TaskConstructor {
         taskList.add(new StorageTransferTask(1));
         return new ComplexTask(1, taskList);
     }
+
 }

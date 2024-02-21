@@ -4,11 +4,13 @@ import java.util.*;
 
 public class MapArt {
     private final List<String> resources = new ArrayList<>();
-    public MapArt(Map<CarpetType, Integer> rawResources){
+    private String schemName;
+    public MapArt(String schemName, Map<CarpetType, Integer> rawResources){
         if (rawResources.size() != 16){
             throw new IllegalArgumentException("Wrong size of map-art resources map");
         }
 
+        this.schemName = schemName;
         for (CarpetType carpetType : rawResources.keySet()){
             if (rawResources.get(carpetType) < 1){
                 continue;
@@ -42,5 +44,9 @@ public class MapArt {
     public int getProgress(){
         double d = ((double) resources.size() / 256 * 100);
         return (int) d;
+    }
+
+    public String getSchemName() {
+        return schemName;
     }
 }

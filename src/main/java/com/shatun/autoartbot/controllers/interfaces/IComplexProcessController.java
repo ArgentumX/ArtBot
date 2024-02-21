@@ -9,6 +9,7 @@ public interface IComplexProcessController {
     boolean isEating();
     boolean isClearingArtArea();
     void goTo(Vec3 position);
+    void build(String schemName, Vec3 topLeftCorner);
     void clearArtSegment(Vec3 artTopLeftCorner, int xBreakingStage, int zBreakingStage);
     void collectItems(boolean enable);
     void allowBreak(boolean enable);

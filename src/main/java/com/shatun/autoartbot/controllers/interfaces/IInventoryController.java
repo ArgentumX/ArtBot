@@ -8,6 +8,7 @@ public interface IInventoryController {
     void closeChest();
     void putOneStackInOpenedChest();
     void putOneStackInOpenedChest(String itemId);
+    void takeOneItemStackFromContainer();
     String getAnyCarpetIdInInventory();
     boolean takeCarpets();
     boolean isInventoryFull();
