@@ -1,6 +1,9 @@
 package com.shatun.autoartbot;
 
 import com.mojang.logging.LogUtils;
+import com.shatun.autoartbot.art.CarpetType;
+import com.shatun.autoartbot.data.ArtData;
+import com.shatun.autoartbot.data.DataManager;
 import com.shatun.autoartbot.utils.PlayerUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
@@ -17,6 +20,8 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
+import javax.xml.crypto.Data;
+
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(AutoArtBot.MODID)
 public class AutoArtBot
@@ -31,6 +36,7 @@ public class AutoArtBot
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
         MinecraftForge.EVENT_BUS.register(ClientListener.class);
         bot = Bot.getInstance();
+        DataManager.initialize();
     }
     public static class ClientListener {
         @SubscribeEvent(priority = EventPriority.LOWEST)
@@ -48,6 +54,11 @@ public class AutoArtBot
                         break;
                     case "transfer":
                         Bot.getInstance().transferItems();
+                        break;
+                    case "build":
+                        if (args.length == 2){
+                            Bot.getInstance().buildArt(args[1]);
+                        }
                         break;
                     default:
                         PlayerUtils.send("Unregistered command");

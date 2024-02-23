@@ -21,8 +21,9 @@ public class BuildingArtTask extends ElementaryTask {
     private int supplyingStage;
     private String[] resourcePortion;
     private boolean triedTwice;
-    public BuildingArtTask(int repeatCount) {
+    public BuildingArtTask(int repeatCount, MapArt art) {
         super(repeatCount);
+        this.art = art;
         state = BuildingArtState.START;
         supplyingStage = -1;
         triedTwice = false;
@@ -123,6 +124,7 @@ public class BuildingArtTask extends ElementaryTask {
 
     private void build(){
         Bot.getInstance().processController.build(art.getSchemName(), Bot.getInstance().getMemory().getPaintTopLeftCorner());
+        state = BuildingArtState.BUILDING;
     }
 
     private void deliveryItems(){

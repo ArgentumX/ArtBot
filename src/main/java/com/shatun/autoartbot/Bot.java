@@ -48,12 +48,17 @@ public class Bot {
         return task;
     }
     public void clearArtArea(){
-        PlayerUtils.send("Start clearing area task");
+        PlayerUtils.send("Starts clearing area task");
         task = TaskConstructor.getClearingArtAreaTask();
     }
     public void transferItems(){
-        PlayerUtils.send("Start transfer items task");
+        PlayerUtils.send("Starts transfer items task");
         task = TaskConstructor.getStorageTransferTask();
+    }
+
+    public void buildArt(String schemName){
+        PlayerUtils.send("Starts building art task");
+        task = TaskConstructor.getBuildingArtTask(schemName);
     }
     public boolean isActive(){
         return task != null && !task.isFinished();

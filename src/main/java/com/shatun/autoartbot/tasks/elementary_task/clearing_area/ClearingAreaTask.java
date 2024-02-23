@@ -1,7 +1,6 @@
 package com.shatun.autoartbot.tasks.elementary_task.clearing_area;
 
 import com.shatun.autoartbot.Bot;
-import com.shatun.autoartbot.memory.Memory;
 import com.shatun.autoartbot.settings.BotSettings;
 import com.shatun.autoartbot.tasks.ElementaryTask;
 import com.shatun.autoartbot.utils.PlayerUtils;
@@ -80,7 +79,7 @@ public class ClearingAreaTask extends ElementaryTask {
                 break;
             case COLLECTING:
                 if (!Bot.getInstance().getTimer().isTimePassed(true)) {
-                    Bot.getInstance().getTimer().wait(BotSettings.collectItemsTime, false);
+                    Bot.getInstance().getTimer().wait(BotSettings.collectItemsTimeout, false);
                     Bot.getInstance().processController.collectItems(true);
                 }
                 else {

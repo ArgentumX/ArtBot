@@ -1,0 +1,3 @@
+1) Remake memory system - (new chest memory (special class with position and tag?), dynamic chest info updating, config integration)
+2) Create class with complex methods for tasks.
+3) Autoreader of mapart resources.

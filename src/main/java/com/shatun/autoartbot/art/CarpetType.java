@@ -18,15 +18,24 @@ public enum CarpetType {
     MAGENTA_CARPET("magenta_carpet"),
     PINK_CARPET("pink_carpet");
 
-    CarpetType(String stringValue) {
-        if(stringValue == null){
+    CarpetType(String id) {
+        if(id == null){
             throw new NullPointerException();
         }
-        this.stringValue = stringValue.toLowerCase();
+        this.id = id.toLowerCase();
     }
-    private final String stringValue;
+    private final String id;
     @Override
     public String toString() {
-        return stringValue;
+        return id;
+    }
+
+    public static CarpetType getById(String id){
+        for (CarpetType carpet : CarpetType.values()){
+            if (carpet.id.equalsIgnoreCase(id)){
+                return carpet;
+            }
+        }
+        return null;
     }
 }

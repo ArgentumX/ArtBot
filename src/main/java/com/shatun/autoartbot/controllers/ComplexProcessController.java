@@ -25,7 +25,7 @@ public class ComplexProcessController implements IComplexProcessController {
 
     @Override
     public boolean isBuilding() {
-        return BaritoneAPI.getProvider().getPrimaryBaritone().getBuilderProcess().isActive() || BaritoneAPI.getProvider().getPrimaryBaritone().getBuilderProcess().isPaused();
+        return BaritoneAPI.getProvider().getPrimaryBaritone().getBuilderProcess().isActive() && !BaritoneAPI.getProvider().getPrimaryBaritone().getBuilderProcess().isPaused();
     }
 
     @Override

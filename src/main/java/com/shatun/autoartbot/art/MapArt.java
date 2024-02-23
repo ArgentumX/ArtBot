@@ -1,5 +1,7 @@
 package com.shatun.autoartbot.art;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 
 public class MapArt {
